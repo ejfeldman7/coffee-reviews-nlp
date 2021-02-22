@@ -63,6 +63,8 @@ with open('blindtopic_tfidf.pickle', 'rb') as read_file:
 
 with open('words_to_score_rf.pickle','rb') as read_file:
     rfr = pickle.load(read_file)
+with open('num_to_score_RF.pickle','rb') as read_file:
+    rfr_num = pickle.load(read_file)
 with open('words_to_score_linear.pickle','rb') as read_file:
     lm = pickle.load(read_file)
 with open('subcats_to_score_lasso.pickle','rb') as read_file:
@@ -78,7 +80,7 @@ with open('lm_flavor.pickle','rb') as read_file:
 with open('lm_body.pickle','rb') as read_file:
     lm_body = pickle.load(read_file)
 
-st.title('Coffee Review Recommendations')    
+st.title('Coffee Review Recommendations and Analysis')    
 
 # Set up model
 doc_word = tfidf_blind
@@ -92,8 +94,27 @@ t = nmf_model.components_.argsort(axis=1)[:,-1:-7:-1]
 
 topic_words = [[words[e] for e in l] for l in t]
 
-topic_features = ['pos','neg','compound','length','word count','bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth','cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries','woody_nut_caramel', 'cherry_vinuous_choc']
+# First checkbox: coffee recommender
 
+if st.checkbox('Get a recommendation for coffee from a description'):
+    # Format inputs
+    user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
+    text = [user_coffee_description]
+    vt = blindtfidf.transform(text).todense()
+    tt1 = nmf_model.transform(vt)
+
+    #Find Recommendations
+    indices = pairwise_distances(tt1.reshape(1,-1),doc_topic,metric='cosine').argsort()
+    recs = list(indices[0][0:4])
+    # df_topic_breakdown.iloc[recs]
+    # st.write('The coffee you liked was described as:',t[0])
+    st.write('\n')
+    if user_coffee_description == '':
+        st.write('Excited to recommend a coffee for you!')
+    else:
+        st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a bean from',ratings.iloc[recs[0]]['Coffee Origin'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+
+# Second checkbox: coffee scorer
 if st.checkbox('Predict overall and category score predictions for a coffee description'):
     user_coffee_description = st.text_input("Provide a couple sentence descripton of the flavors, acid level, aroma, aftertaste, and body of your coffee.", '')
     user_text = [user_coffee_description]
@@ -136,34 +157,28 @@ if st.checkbox('Predict overall and category score predictions for a coffee desc
                 'A flavor score of (out of 10):',flavor[0].round(2),'\n\n',
                 'A body score of (out of 10):',body[0].round(2))
 
-if st.checkbox('Predict overall score for a coffee based on its subcategory scores'):
-    user_coffee_description = st.text_input("Provide a couple sentence descripton of the flavors, acid level, aroma, aftertaste, and body of your coffee.", '')
-    text = [user_coffee_description]
-    vt = blindtfidf.transform(text).todense()
-    tt1 = nmf_model.transform(vt)
-    overall = lm.predict(tt1)
-    if user_coffee_description == '':
-        st.write('Excited to predict the scores of your coffee!')
-    else:
-        st.write('Based on your input coffee, I predict it to receive a score of:')
         
-if st.checkbox('Get a recommendation for coffee from a description'):
-    # Format inputs
-    user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
-    text = [user_coffee_description]
-    vt = blindtfidf.transform(text).todense()
-    tt1 = nmf_model.transform(vt)
 
-    #Find Recommendations
-    indices = pairwise_distances(tt1.reshape(1,-1),doc_topic,metric='cosine').argsort()
-    recs = list(indices[0][0:4])
-    # df_topic_breakdown.iloc[recs]
-    # st.write('The coffee you liked was described as:',t[0])
-    st.write('\n')
-    if user_coffee_description == '':
-        st.write('Excited to recommend a coffee for you!')
-    else:
-        st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a bean from',ratings.iloc[recs[0]]['Coffee Origin'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+# Third checkbox: coffee scorer if you know the underlying category scores...
+if st.checkbox('Predict overall score for a coffee based on its subcategory scores'):
+    aroma = st.slider('aroma',min_value=1,max_value=10,step=1)
+    body = st.slider('body',min_value=1,max_value=10,step=1)
+    flavor = st.slider('flavor',min_value=1,max_value=10,step=1)
+    aftertaste = st.slider('aftertaste',min_value=1,max_value=10,step=1)
+    acidity = st.slider('acidity',min_value=1,max_value=10,step=1)
+    
+    features = ['aroma', 'body', 'flavor', 'aftertaste', 'acidity']
+    df_feat = pd.DataFrame(columns = features)
+    df_feat.aroma = [aroma]
+    df_feat.body = [body]
+    df_feat.flavor = [flavor]
+    df_feat.aftertaste = [aftertaste]
+    df_feat.acidity = [acidity]
+    
+    overall = rfr_num.predict(df_feat)[0].round(2)
+    st.write('With subcategory scores as shown above, I predict your coffee to be review overall as:',overall)
+
+        
 
 
 # In[ ]:
