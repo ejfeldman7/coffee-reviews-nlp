@@ -1,6 +1,8 @@
 # Coffee-Reviews-NLP
  Analysis of cofffee reviews using natural language processing to create predictions for review scores, recommend similar coffees, and generate coffee reviews
 
+This text is a placeholder for a link to my Streamlit app, once it is hosted for remote use.
+
 # Contents
 
 ## In the Notebooks folder you will find:
