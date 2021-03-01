@@ -15,7 +15,7 @@
 - coffee_app: Combining predictions, recommendations, and more into a Streamlit app
 - lda: A notebook for creating cluster of reviews using Latent Dirichlet Allocation
 - kmeans: A notebook for running KMeans clustering on ratings, convectorized corpus, and tf-idf corpus, includes visuals
-- 
+
 ## In the Visuals folder you will find:  
 
 An assortment of visuals used for the presentation
