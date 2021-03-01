@@ -9,12 +9,13 @@
 - first-nlp: Preprocessing, regex, lemmatizing, countvectorizing, and tf-idf  
 - nmf: Creating clusters of reviews into topics based on countvectorized corpus
 - coffee_ratings_models:Linear and random forest regression based on scores and nlp to determine overall rating of coffees
-- visualizations and topic_explorations: Creating visualizations throughout the project
+- visualizations: word clouds and distributions of scores/topic assignemtns
+- topic_explorations: polar plots and other attempts to better understand topic assignments
 - sentiment_analysis: Analyzing reviews for positive, negative, and neutral sentiment using Vader
 - recommendations: Building coffee recommendations based on cosine similarity from NMF topics
 - coffee_app: Combining predictions, recommendations, and more into a Streamlit app
-- lda: A notebook for creating cluster of reviews using Latent Dirichlet Allocation
-- kmeans: A notebook for running KMeans clustering on ratings, convectorized corpus, and tf-idf corpus, includes visuals
+- lda: A notebook for creating cluster of reviews using Latent Dirichlet Allocation (not applied directly to results)
+- kmeans: A notebook for running KMeans clustering on ratings, convectorized corpus, and tf-idf corpus, includes visuals (not applied directly to results)
 
 ## In the Visuals folder you will find:  
 
