@@ -1,6 +1,8 @@
 # Coffee-Reviews-NLP
  Analysis of cofffee reviews using natural language processing to create predictions for review scores, recommend similar coffees, and generate coffee reviews
 
+# Contents
+
 ## In the Notebooks folder you will find:
 
 - scraping: Beautiful soup and my .py files to scrape the coffee reviews from CoffeeReview.com  
@@ -17,6 +19,8 @@
 ## In the Visuals folder you will find:  
 
 An assortment of visuals used for the presentation
+
+# Summary of Work and Findings  
 
 ## Process
 
