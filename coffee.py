@@ -1,11 +1,21 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# ## Streamlit Application
+# 
+# Streamlit application for deploying coffee recommender, score predictor, and review generator.
+
 # In[7]:
 
 
-import streamlit as st
+# !pip install pipreqsnb
+get_ipython().system('pipreqsnb C:\\Users\\ejfel\\Documents\\metis_repos\\Coffee-Reviews-NLP\\coffee.py')
 
+
+# In[2]:
+
+
+import streamlit as st
 
 import pandas as pd
 pd.set_option('display.max_columns', None)
@@ -13,24 +23,16 @@ import numpy as np
 import re
 import requests
 import pickle
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk.tokenize import word_tokenize
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import NMF
-from sklearn.metrics import pairwise_distances
-
 from collections import defaultdict
 import random
 
 import nltk
 nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-
-
+from nltk.tokenize import word_tokenize
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import NMF
+from sklearn.metrics import pairwise_distances
 
 with open('coffee_words.pickle','rb') as read_file:
     coffee = pickle.load(read_file)
