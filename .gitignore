@@ -6,8 +6,8 @@ __pycache__/
 # Data Storage
 
 *.csv
-*.pkl
-*.pickle
+# *.pkl
+# *.pickle
 *.sav
 
 # C extensions
