@@ -34,55 +34,59 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
 from sklearn.metrics import pairwise_distances
 
-with open('coffee_words.pickle','rb') as read_file:
+#Paths
+#'/app/Coffee-Reviews-NLP/web_app/models_embeddings/'
+#'/app/Coffee-Reviews-NLP/web_app/data/'
+
+with open('/app/Coffee-Reviews-NLP/web_app/data/coffee_words.pickle','rb') as read_file:
     coffee = pickle.load(read_file)
-with open('coffee_ratings.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/data/coffee_ratings.pickle','rb') as read_file:
     ratings = pickle.load(read_file)
-with open('combined.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/data/combined.pickle','rb') as read_file:
     combined = pickle.load(read_file)
-with open('df_full.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/data/df_full.pickle','rb') as read_file:
     df = pickle.load(read_file)
-with open('df_topic_breakdown.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/data/df_topic_breakdown.pickle','rb') as read_file:
     df_topic_breakdown = pickle.load(read_file)
-with open('sentiment.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/sentiment.pickle','rb') as read_file:
     sentiment = pickle.load(read_file)
-with open('generating_reviews.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/generating_reviews.pickle','rb') as read_file:
     generating_reviews = pickle.load(read_file)
 
-with open('blindtfidf_vec.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtfidf_vec.pickle', 'rb') as read_file:
     blindtfidf = pickle.load(read_file)
-with open('blindtfidf_mat.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtfidf_mat.pickle', 'rb') as read_file:
     tfidf_blind = pickle.load(read_file)
 ratings = ratings.reset_index().rename(columns={'index':'Roaster'})
 
-with open('nmf_tfidfblind.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/nmf_tfidfblind.pickle', 'rb') as read_file:
     nmf_tfidfblind = pickle.load(read_file)
 
-with open('blindvectorizer.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindvectorizer.pickle', 'rb') as read_file:
     blindvectorizer = pickle.load(read_file)
-with open('blindtfidf_topic.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtfidf_topic.pickle', 'rb') as read_file:
     blindtfidf_topic = pickle.load(read_file)
-with open('blindtopic_tfidf.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings//app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtopic_tfidf.pickle', 'rb') as read_file:
     blindtopic_tfidf = pickle.load(read_file)
 
 
-with open('words_to_score_rf.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/words_to_score_rf.pickle','rb') as read_file:
     rfr = pickle.load(read_file)
-with open('num_to_score_RF.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/num_to_score_RF.pickle','rb') as read_file:
     rfr_num = pickle.load(read_file)
-with open('words_to_score_linear.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/words_to_score_linear.pickle','rb') as read_file:
     lm = pickle.load(read_file)
-with open('subcats_to_score_lasso.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/subcats_to_score_lasso.pickle','rb') as read_file:
     lasso = pickle.load(read_file)
-with open('lm_aroma.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_aroma.pickle','rb') as read_file:
     lm_aroma = pickle.load(read_file)
-with open('lm_acidity.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_acidity.pickle','rb') as read_file:
     lm_acidity = pickle.load(read_file)
-with open('lm_aftertaste.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_aftertaste.pickle','rb') as read_file:
     lm_aftertaste = pickle.load(read_file)
-with open('lm_flavor.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_flavor.pickle','rb') as read_file:
     lm_flavor = pickle.load(read_file)
-with open('lm_body.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_body.pickle','rb') as read_file:
     lm_body = pickle.load(read_file)
 
 import os.path
