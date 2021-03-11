@@ -54,4 +54,6 @@ As a last step and an item for future consideration, I also created a small mode
 
 ## Demo
 
-![Streamlit Demo Gif](https://github.com/ejfeldman7/Coffee-Reviews-NLP/Visuals/coffee_demo.gif)
+![Streamlit Demo Gif](https://github.com/ejfeldman7/Coffee-Reviews-NLP/blob/main/Visuals/coffee_demo.gif)
+
+
