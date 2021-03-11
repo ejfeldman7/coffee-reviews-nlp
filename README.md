@@ -2,7 +2,7 @@
 
 Analysis of cofffee reviews using natural language processing to create predictions for review scores, recommend similar coffees, and generate coffee reviews
 
-This text is a placeholder for a link to my Streamlit app, once it is hosted for remote use.
+For a short demo of the Streamlit app, please scroll to the bottom of the ReadMe.
 
 # Contents
 
@@ -51,3 +51,7 @@ For example, when the model was run on a [new coffee (reviewed after the corpus 
 ## Text Generation
 
 As a last step and an item for future consideration, I also created a small model to create a computer generated review based on a subset of coffee reviews. A user can select a subset of coffee reviews based on their majority assignment by the NMF topic model and a simple Markov model generates a short review.
+
+## Demo
+
+![Streamlit Demo Gif](https://github.com/ejfeldman7/Coffee-Reviews-NLP/Visuals/coffee_demo.gif)
