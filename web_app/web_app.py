@@ -38,7 +38,7 @@ from sklearn.metrics import pairwise_distances
 #'/app/Coffee-Reviews-NLP/web_app/models_embeddings/'
 #'/app/Coffee-Reviews-NLP/web_app/data/'
 
-with open('/app/Coffee-Reviews-NLP/web_app/coffee_words.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/coffee_words.pickle','rb') as read_file:
     coffee = pickle.load(read_file)
 with open('/app/Coffee-Reviews-NLP/web_app/coffee_ratings.pickle','rb') as read_file:
     ratings = pickle.load(read_file)
