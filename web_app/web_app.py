@@ -34,8 +34,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
 from sklearn.metrics import pairwise_distances
 
-from plotly.subplots import make_subplots
+import plotly
 import plotly.graph_objects as go
+import plotly.express as px
+from plotly.subplots import make_subplots
 
 #Paths
 #'/app/Coffee-Reviews-NLP/web_app/models_embeddings/'
@@ -180,7 +182,7 @@ elif choice == 'Recommender':
         names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
         categories = ['bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth','cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries','woody_nut_caramel', 'cherry_vinuous_choc']
         topics = ['Bright, Floral, Citrus', 'Chocolate, Dark, Woody', 'Tart, Sweet, Smooth','Cacao, Nutty, Clean', 'Sweet, Nut, Pine', 'Juicy, Honey, Cacao', 'Red Berries','Nutty, Caramel, Woody', 'Cherry, Vinuous, Chocolate']
-        fig = plotly.graph_objects.Figure()
+        fig = go.Figure()
 
         for i in range(0,2):
             fig.add_trace(go.Scatterpolar(
