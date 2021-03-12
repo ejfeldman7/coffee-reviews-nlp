@@ -123,6 +123,12 @@ if next:
 # create your radio button with the index that we loaded
 choice = st.sidebar.radio("go to",('Home','Recommender','Score from Text','Score from Score','Generated Reviews'), index=next_clicked)
 
+st.sidebar.write(
+    '''
+    This project was built from just under 6000 reviews from www.coffeereview.com. The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. 
+    \n
+    This site was created by Ethan Feldman. You can find him on GitHub, LinkedIn, Medium/TDS and eventually on his website (link to come)!
+    ''')
 # pickle the index associated with the value, to keep track if the radio button has been used
 pickle.dump(new_choice.index(choice), open('next.p', 'wb'))
 
