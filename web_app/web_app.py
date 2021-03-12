@@ -125,9 +125,10 @@ choice = st.sidebar.radio("go to",('Home','Recommender','Score from Text','Score
 
 st.sidebar.write(
     '''
+    _About_ \n
     This project was built from just under 6000 reviews from www.coffeereview.com. The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. 
     \n
-    This site was created by Ethan Feldman. You can find him on GitHub, LinkedIn, Medium/TDS and eventually on his website (link to come)!
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!
     ''')
 # pickle the index associated with the value, to keep track if the radio button has been used
 pickle.dump(new_choice.index(choice), open('next.p', 'wb'))
@@ -137,11 +138,8 @@ if choice == 'Home':
     st.title('Welcome to my data analysis app for coffee reviews!')
     '''
     This project was built from just under 6000 reviews from  www.coffeereview.com. 
-    The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. 
-    These vectors and additional features can be used for recommendations, predicting scores, and more.  \r\n
-    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
-    [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!  \r\n
-    \r\n
+    The blind reviews were used to create nine-dimensional flavor vectors using non-negative matrix factorization on a TF-IDF encoding of each coffee's review. This enabled comparison between coffees by their difference or similarity across the derived flavor spectrum.
+    These vectors and additional features were then used for recommendations of coffees with similar vectors, predicting scores, and more.  \r\n
     __On the side bar__ on the left you will find a few different application  \r\n
     __Below__ is a quick table of contents for the different pages of the site
     '''
@@ -151,6 +149,9 @@ if choice == 'Home':
     3. Use the __Score from Text__ app to generate a prediction for overall and subcategory score based on a coffee's description
     4. Use the __ Score from Scores__ app to generate an overall score prediction based on subcategory scores
     5. Use the __Generated Reviews__ app to create a computer generated review for a coffee depending on different flavor attributes
+    \r\n
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
+    [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!  \r\n
     '''
     
 elif choice == 'Recommender':
