@@ -38,55 +38,55 @@ from sklearn.metrics import pairwise_distances
 #'/app/Coffee-Reviews-NLP/web_app/models_embeddings/'
 #'/app/Coffee-Reviews-NLP/web_app/data/'
 
-with open('/Coffee-Reviews-NLP/web_app/data/coffee_words.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/coffee_words.pickle','rb') as read_file:
     coffee = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/data/coffee_ratings.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/coffee_ratings.pickle','rb') as read_file:
     ratings = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/data/combined.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/combined.pickle','rb') as read_file:
     combined = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/data/df_full.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/df_full.pickle','rb') as read_file:
     df = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/data/df_topic_breakdown.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/df_topic_breakdown.pickle','rb') as read_file:
     df_topic_breakdown = pickle.load(read_file)
 with open('/app/Coffee-Reviews-NLP/web_app/sentiment.pickle','rb') as read_file:
     sentiment = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/generating_reviews.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/generating_reviews.pickle','rb') as read_file:
     generating_reviews = pickle.load(read_file)
 
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtfidf_vec.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/blindtfidf_vec.pickle', 'rb') as read_file:
     blindtfidf = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtfidf_mat.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/blindtfidf_mat.pickle', 'rb') as read_file:
     tfidf_blind = pickle.load(read_file)
 ratings = ratings.reset_index().rename(columns={'index':'Roaster'})
 
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/nmf_tfidfblind.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/nmf_tfidfblind.pickle', 'rb') as read_file:
     nmf_tfidfblind = pickle.load(read_file)
 
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindvectorizer.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/blindvectorizer.pickle', 'rb') as read_file:
     blindvectorizer = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtfidf_topic.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/blindtfidf_topic.pickle', 'rb') as read_file:
     blindtfidf_topic = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings//app/Coffee-Reviews-NLP/web_app/models_embeddings/blindtopic_tfidf.pickle', 'rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/blindtopic_tfidf.pickle', 'rb') as read_file:
     blindtopic_tfidf = pickle.load(read_file)
 
 
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/words_to_score_rf.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/words_to_score_rf.pickle','rb') as read_file:
     rfr = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/num_to_score_RF.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/num_to_score_RF.pickle','rb') as read_file:
     rfr_num = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/words_to_score_linear.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/words_to_score_linear.pickle','rb') as read_file:
     lm = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/subcats_to_score_lasso.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/subcats_to_score_lasso.pickle','rb') as read_file:
     lasso = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_aroma.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/lm_aroma.pickle','rb') as read_file:
     lm_aroma = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_acidity.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/lm_acidity.pickle','rb') as read_file:
     lm_acidity = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_aftertaste.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/lm_aftertaste.pickle','rb') as read_file:
     lm_aftertaste = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_flavor.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/lm_flavor.pickle','rb') as read_file:
     lm_flavor = pickle.load(read_file)
-with open('/app/Coffee-Reviews-NLP/web_app/models_embeddings/lm_body.pickle','rb') as read_file:
+with open('/app/Coffee-Reviews-NLP/web_app/lm_body.pickle','rb') as read_file:
     lm_body = pickle.load(read_file)
 
 import os.path
@@ -129,7 +129,16 @@ pickle.dump(new_choice.index(choice), open('next.p', 'wb'))
 # finally get to whats on each page
 if choice == 'Home':
     st.title('Welcome to my data analysis app for coffee reviews!')
-    '''On the side bar on the left you will find a few different applications'''
+    '''
+    This project was built from just under 6000 reviews from  www.coffeereview.com.  \
+    The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. \
+    These vectors and additional features can be used for recommendations, predicting scores, and more
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), \
+    [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!  \
+    \
+    On the side bar on the left you will find a few different application  \
+    Below is a quick table of contents for the different pages of the site
+    '''
     '''
     1. This is the __Home Page__
     2. Use the __Recommender__ app to get a coffee recommendation based on your flavor description
