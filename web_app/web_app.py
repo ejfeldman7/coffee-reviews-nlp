@@ -130,9 +130,9 @@ pickle.dump(new_choice.index(choice), open('next.p', 'wb'))
 if choice == 'Home':
     st.title('Welcome to my data analysis app for coffee reviews!')
     '''
-    This project was built from just under 6000 reviews from  www.coffeereview.com. \
-    The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. \
-    These vectors and additional features can be used for recommendations, predicting scores, and more.  \
+    This project was built from just under 6000 reviews from  www.coffeereview.com. \n
+    The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. \n
+    These vectors and additional features can be used for recommendations, predicting scores, and more.  \r\n
     This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
     [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!  \r\n
     \r\n
