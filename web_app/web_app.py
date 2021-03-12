@@ -262,7 +262,7 @@ elif choice == 'Score from Text':
                 'A body score of (out of 10):',body[0].round(2))
 
 elif choice == 'Score from Score':
-    st.title('Overal Score Based on Subcategories')
+    st.title('Overall Score Based on Subcategories')
     st.write('Use this tool to create a 0-100 rating based on subscores in the categories below.')
     
     aroma = st.slider('aroma',min_value=1,max_value=10,step=1)
