@@ -177,7 +177,7 @@ elif choice == 'Recommender':
         names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
         categories = ['bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth','cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries','woody_nut_caramel', 'cherry_vinuous_choc']
         topics = ['Bright, Floral, Citrus', 'Chocolate, Dark, Woody', 'Tart, Sweet, Smooth','Cacao, Nutty, Clean', 'Sweet, Nut, Pine', 'Juicy, Honey, Cacao', 'Red Berries','Nutty, Caramel, Woody', 'Cherry, Vinuous, Chocolate']
-        fig = go.Figure()
+        fig = plotly.graph_objects.Figure()
 
         for i in range(0,2):
             fig.add_trace(go.Scatterpolar(
