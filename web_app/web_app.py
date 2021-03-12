@@ -125,7 +125,7 @@ choice = st.sidebar.radio("go to",('Home','Recommender','Score from Text','Score
 
 st.sidebar.write(
     '''
-    _About_ \n
+    __About__ \n
     This project was built from just under 6000 reviews from www.coffeereview.com. The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. 
     \n
     This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!
@@ -156,7 +156,7 @@ if choice == 'Home':
     
 elif choice == 'Recommender':
     st.title('Coffee Recommender')
-    st.write('Get a new coffee recommendation')
+    st.write('Get a new coffee recommendation. Please keep in mind the reviews in this recommendation span across multiple years and the coffee recommended may not be currently available.')
     # Format inputs
     user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
     text = [user_coffee_description]
@@ -177,7 +177,7 @@ elif choice == 'Recommender':
 
 elif choice == 'Score from Text':
     st.title('Score Predictor')
-    st.write('Predict coffee scores from reviews')
+    st.write('Predict coffee scores from reviews. This output is a prediction of the score that might be assigned on a 0-100 scale as well as subscores on a 0-10 scale.')
     
     user_coffee_description = st.text_input("Provide a couple sentence descripton of the flavors, acid level, aroma, aftertaste, and body of your coffee.", '')
     user_text = [user_coffee_description]
@@ -221,8 +221,8 @@ elif choice == 'Score from Text':
                 'A body score of (out of 10):',body[0].round(2))
 
 elif choice == 'Score from Score':
-    st.title('Score Predictor (if you have the details)')
-    st.write('Predict an overall score from subcategories')
+    st.title('Overal Score Based on Subcategories')
+    st.write('Use this tool to create a 0-100 rating based on subscores in the categories below.')
     
     aroma = st.slider('aroma',min_value=1,max_value=10,step=1)
     body = st.slider('body',min_value=1,max_value=10,step=1)
@@ -243,7 +243,7 @@ elif choice == 'Score from Score':
 
 elif choice == 'Generated Reviews':
     st.title('Review Generator')
-    st.write('Generate a rough draft review based on past reviews in the category')    
+    st.write('Generate a rough draft review based on past reviews in the category.')    
 
     first = st.checkbox("Coffee Type: Smooth, Citrus, Floral")
     second = st.checkbox("Coffee Type: Dark, Chocolate, Roast, Wood ")
