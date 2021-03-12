@@ -173,10 +173,43 @@ elif choice == 'Recommender':
     if user_coffee_description == '':
         st.write('Excited to recommend a coffee for you!')
     else:
+        example_comps=[doc_topic[recs[0]],tt1.reshape(1,-1)]
+        names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
+        categories = ['bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth','cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries','woody_nut_caramel', 'cherry_vinuous_choc']
+        topics = ['Bright, Floral, Citrus', 'Chocolate, Dark, Woody', 'Tart, Sweet, Smooth','Cacao, Nutty, Clean', 'Sweet, Nut, Pine', 'Juicy, Honey, Cacao', 'Red Berries','Nutty, Caramel, Woody', 'Cherry, Vinuous, Chocolate']
+        fig = go.Figure()
+
+        for i in range(0,2):
+            fig.add_trace(go.Scatterpolar(
+                  r=example_comps[i],
+                  theta=topics,
+                  fill=None,
+                  name=names[i],
+                opacity = .5,
+            ))
+
+        fig.update_layout(
+                title = {
+                    'text':'Visualizing a comparison',
+                    'y':.9,
+                    'x':.5,
+                    'xanchor':'center',
+                    'yanchor':'top'},
+                legend_title="Comparison Coffees",
+          polar=dict(
+            radialaxis=dict(
+              visible=False,
+              range=[0, .12]
+            )),
+          showlegend=True
+            )
+        
         if ratings.iloc[recs[0]]['Coffee Origin'] == 'Not disclosed':
-            st.write('Based on your input coffee, I recommend you try a blend from:','\n\n',ratings.iloc[recs[0]]['Roaster'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.write('Based on your input coffee, I recommend you try a blend from:','\n\n',ratings.iloc[recs[0]]['Roaster'],'\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.plotly_chart(fig, use_container_width=True)
         else:
-            st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a great bean from',ratings.iloc[recs[0]]['Coffee Origin'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a great bean from',ratings.iloc[recs[0]]['Coffee Origin']+'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.plotly_chart(fig, use_container_width=True)
 
 elif choice == 'Score from Text':
     st.title('Score Predictor')
