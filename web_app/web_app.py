@@ -173,10 +173,10 @@ elif choice == 'Recommender':
     if user_coffee_description == '':
         st.write('Excited to recommend a coffee for you!')
     else:
-        if ratings.iloc[recs[0]]['Coffee Origin'] == 'Not Disclosed':
+        if ratings.iloc[recs[0]]['Coffee Origin'] == 'Not disclosed':
             st.write('Based on your input coffee, I recommend you try a blend from:','\n\n',ratings.iloc[recs[0]]['Roaster'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
         else:
-            st.write('Based on your input coffee, I recommend you try the:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a great bean from',ratings.iloc[recs[0]]['Coffee Origin'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a great bean from',ratings.iloc[recs[0]]['Coffee Origin'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
 
 elif choice == 'Score from Text':
     st.title('Score Predictor')
