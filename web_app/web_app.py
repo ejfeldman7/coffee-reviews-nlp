@@ -178,7 +178,7 @@ elif choice == 'Recommender':
     if user_coffee_description == '':
         st.write('Excited to recommend a coffee for you!')
     else:
-        example_comps=[doc_topic[recs[0]],[tt1.reshape(1,-1)]]
+        example_comps=[doc_topic[recs[0]],tt1[0]]
         names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
         categories = ['bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth','cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries','woody_nut_caramel', 'cherry_vinuous_choc']
         topics = ['Bright, Floral, Citrus', 'Chocolate, Dark, Woody', 'Tart, Sweet, Smooth','Cacao, Nutty, Clean', 'Sweet, Nut, Pine', 'Juicy, Honey, Cacao', 'Red Berries','Nutty, Caramel, Woody', 'Cherry, Vinuous, Chocolate']
