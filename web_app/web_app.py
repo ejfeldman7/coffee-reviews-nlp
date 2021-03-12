@@ -34,6 +34,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
 from sklearn.metrics import pairwise_distances
 
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
 #Paths
 #'/app/Coffee-Reviews-NLP/web_app/models_embeddings/'
 #'/app/Coffee-Reviews-NLP/web_app/data/'
