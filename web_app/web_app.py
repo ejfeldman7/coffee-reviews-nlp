@@ -101,7 +101,7 @@ next = st.sidebar.button('Next on list')
 
 # will use this list and next button to increment page, MUST BE in the SAME order
 # as the list passed to the radio button
-new_choice = ['Home','Recommender','Score from Text','Score from Score','Generated Reviews']
+new_choice = ['Home','Recommender','Score from Text','Score from Subscores','Generated Reviews']
 
 # This is what makes this work, check directory for a pickled file that contains
 # the index of the page you want displayed, if it exists, then you pick up where the
@@ -126,7 +126,7 @@ if next:
         next_clicked = 0 # go back to the beginning i.e. homepage
 
 # create your radio button with the index that we loaded
-choice = st.sidebar.radio("go to",('Home','Recommender','Score from Text','Score from Score','Generated Reviews'), index=next_clicked)
+choice = st.sidebar.radio("go to",('Home','Recommender','Score from Text','Score from Subscores','Generated Reviews'), index=next_clicked)
 
 st.sidebar.write(
     '''
@@ -152,7 +152,7 @@ if choice == 'Home':
     1. This is the __Home Page__
     2. Use the __Recommender__ app to get a coffee recommendation based on your flavor description
     3. Use the __Score from Text__ app to generate a prediction for overall and subcategory score based on a coffee's description
-    4. Use the __ Score from Scores__ app to generate an overall score prediction based on subcategory scores
+    4. Use the __ Score from Subscores__ app to generate an overall score prediction based on subcategory scores
     5. Use the __Generated Reviews__ app to create a computer generated review for a coffee depending on different flavor attributes
     \r\n
     This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
