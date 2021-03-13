@@ -265,7 +265,7 @@ elif choice == 'Score from Text':
                 'A flavor score of (out of 10):',flavor[0].round(2),'\n\n',
                 'A body score of (out of 10):',body[0].round(2))
 
-elif choice == 'Score from Score':
+elif choice == 'Score from Subscores':
     st.title('Overall Score Based on Subcategories')
     st.write('Use this tool to create a 0-100 rating based on subscores in the categories below.')
     
@@ -288,7 +288,7 @@ elif choice == 'Score from Score':
 
 elif choice == 'Generated Reviews':
     st.title('Review Generator')
-    st.write('Generate a rough draft review based on past reviews in the category.')    
+    st.write('Generate a "rough draft" review based on past reviews in the category.')    
 
     first = st.checkbox("Coffee Type: Smooth, Citrus, Floral")
     second = st.checkbox("Coffee Type: Dark, Chocolate, Roast, Wood ")
