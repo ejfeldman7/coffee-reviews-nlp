@@ -168,6 +168,10 @@ elif choice == 'Recommender':
     user_coffee_description = ''
     if first:
         user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
+        st.write('''
+        If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean: \n 
+        Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
+        ''')
     elif second:
         col1, col2, col3 = st.beta_columns(3)
         a,b,c,d,e,f = col1.checkbox('Berries'),col1.checkbox('Cherry'),col1.checkbox('Wine-y'),col1.checkbox('Floral'),col1.checkbox('Citrus'),col1.checkbox('Tropical')
@@ -223,15 +227,13 @@ elif choice == 'Recommender':
     #Find Recommendations
     indices = pairwise_distances(tt1.reshape(1,-1),doc_topic,metric='cosine').argsort()
     recs = list(indices[0][0:4])
-    # df_topic_breakdown.iloc[recs]
-    # st.write('The coffee you liked was described as:',t[0])
+   
     st.write('\n')
+    
     if user_coffee_description == '':
         st.write('''
-        Excited to recommend a coffee for you! \n 
-        If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean: \n 
-        Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
-        ''')
+        Excited to recommend a coffee for you!''') 
+       
     else:
         example_comps=[doc_topic[recs[0]],tt1[0]]
         names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
