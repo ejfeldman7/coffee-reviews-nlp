@@ -179,7 +179,7 @@ elif choice == 'Recommender':
         st.write('''
         Excited to recommend a coffee for you! \n 
         If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean: \n 
-        Crisply sweet, chocolaty and nut-toned. Baking chocolate, cashew, lily, molasses, gently scorched cedar in aroma and small cup. Satiny-smooth mouthfeel; nut-toned finish with chocolate undertones supported by gently scorched cedar.
+        Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
         ''')
     else:
         example_comps=[doc_topic[recs[0]],tt1[0]]
@@ -261,7 +261,7 @@ elif choice == 'Score from Text':
         If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean which was not part of the reviews of this project. \n 
         If you are interested, the real scores for this coffee were: \n
         Overall 93, Aroma 9, Acidity 9, Body 8, Flavor 9, Aftertaste 8 \n
-        Crisply sweet, chocolaty and nut-toned. Baking chocolate, cashew, lily, molasses, gently scorched cedar in aroma and small cup. Satiny-smooth mouthfeel; nut-toned finish with chocolate undertones supported by gently scorched cedar.
+        Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
         ''')
     else:
         st.write('Based on your input coffee, I predict it to receive a score of:',overall[0].round(2),'\n\n',
