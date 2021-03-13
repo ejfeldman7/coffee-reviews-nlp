@@ -208,7 +208,7 @@ elif choice == 'Recommender':
           polar=dict(
             radialaxis=dict(
               visible=False,
-              range=[0, .12]
+              range=[0, max(max(doc_topic[recs[0]]),max(tt1[0]))+.03]
             )),
           showlegend=True
             )
