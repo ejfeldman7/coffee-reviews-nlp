@@ -161,18 +161,21 @@ if choice == 'Home':
     
 elif choice == 'Recommender':
     st.title('Coffee Recommender')
-    st.write('Get a new coffee recommendation. Please keep in mind the reviews in this recommendation span across multiple years and the coffee recommended may not be currently available.')
-    # Format inputs
+    st.write('''Get a new coffee recommendation. Please keep in mind the reviews in this recommendation span across multiple years and the coffee recommended may not be currently available. \n
+             Please select from __one__ of the two options below.''')
+    
     first = st.checkbox('I want to enter a description of my own')
     second = st.checkbox("I'd like a list of adjectives to choose from")
     user_coffee_description = ''
     if first:
+        # User inputs their own description
         user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
         st.write('''
         If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean: \n 
         Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
         ''')
     elif second:
+        # User selects from a list of adjective categories
         col1, col2, col3 = st.beta_columns(3)
         a,b,c,d,e,f = col1.checkbox('Berries'),col1.checkbox('Cherry'),col1.checkbox('Wine-y'),col1.checkbox('Floral'),col1.checkbox('Citrus'),col1.checkbox('Tropical')
         
@@ -218,7 +221,8 @@ elif choice == 'Recommender':
         elif r:
             text_list = text_list + [random.choice(['rich'])]
         user_coffee_description = ' '.join(text_list)
-        
+    
+    # User text is converted to vector and given topic scores  
     text = [user_coffee_description]
     doc_topic = blindtfidf_topic
     vt = blindtfidf.transform(text).todense()
@@ -229,18 +233,18 @@ elif choice == 'Recommender':
     recs = list(indices[0][0:4])
    
     st.write('\n')
-    
+    # Placeholder for recommendation
     if user_coffee_description == '':
         st.write('''
         Excited to recommend a coffee for you!''') 
-       
+    # Give recommendations   
     else:
+        # Setting up polar plots for comparison of input and recommendation
         example_comps=[doc_topic[recs[0]],tt1[0]]
         names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
         categories = ['bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth','cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries','woody_nut_caramel', 'cherry_vinuous_choc']
         topics = ['Bright, Floral, Citrus', 'Chocolate, Dark, Woody', 'Tart, Sweet, Smooth','Cacao, Nutty, Clean', 'Sweet, Nut, Pine', 'Juicy, Honey, Cacao', 'Red Berries','Nutty, Caramel, Woody', 'Cherry, Vinuous, Chocolate']
         fig = go.Figure()
-
         for i in range(0,2):
             fig.add_trace(go.Scatterpolar(
                   r=example_comps[i],
