@@ -2,7 +2,7 @@
 
 Analysis of cofffee reviews using natural language processing to create predictions for review scores, recommend similar coffees, and generate coffee reviews
 
-For a short demo of the Streamlit app, please scroll to the bottom of the ReadMe.
+[The Streamlit app can be found here](https://share.streamlit.io/ejfeldman7/coffee-reviews-nlp/main/web_app/web_app.py), but for a short demo of the Streamlit app, please scroll to the bottom of the ReadMe.
 
 # Contents
 
