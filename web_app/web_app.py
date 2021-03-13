@@ -266,7 +266,7 @@ elif choice == 'Recommender':
           showlegend=True
             )
         
-        if ratings.iloc[recs[0]]['Coffee Origin'] == 'Not disclosed' or ratings.iloc[recs[0]]['Coffee Origin'].isnull() == 1:
+        if ratings.iloc[recs[0]]['Coffee Origin'] == 'Not disclosed' or ratings.iloc[recs[0]]['Coffee Origin'] == None:
             st.write('Based on your input coffee, I recommend you try a blend from:','\n\n',ratings.iloc[recs[0]]['Roaster'],'\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
             st.plotly_chart(fig, use_container_width=True)
         else:
