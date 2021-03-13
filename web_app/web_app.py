@@ -176,7 +176,11 @@ elif choice == 'Recommender':
     # st.write('The coffee you liked was described as:',t[0])
     st.write('\n')
     if user_coffee_description == '':
-        st.write('Excited to recommend a coffee for you!')
+        st.write('''
+        Excited to recommend a coffee for you! \n 
+        If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean: \n 
+        Crisply sweet, chocolaty and nut-toned. Baking chocolate, cashew, lily, molasses, gently scorched cedar in aroma and small cup. Satiny-smooth mouthfeel; nut-toned finish with chocolate undertones supported by gently scorched cedar.
+        ''')
     else:
         example_comps=[doc_topic[recs[0]],tt1[0]]
         names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
