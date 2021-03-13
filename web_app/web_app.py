@@ -169,7 +169,7 @@ elif choice == 'Recommender':
     if first:
         user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
     elif second:
-col1, col2, col3 = st.beta_columns(3)
+        col1, col2, col3 = st.beta_columns(3)
         a,b,c,d,e,f = col1.checkbox('Berries'),col1.checkbox('Cherry'),col1.checkbox('Wine-y'),col1.checkbox('Floral'),col1.checkbox('Citrus'),col1.checkbox('Tropical')
         
         g,h,i,j,k,l =col2.checkbox('Woody'),col2.checkbox('Caramel'),col2.checkbox('Honey'),col2.checkbox('Chocolate'),col2.checkbox('Very Light Roast'),col2.checkbox('Very Dark Roast')
