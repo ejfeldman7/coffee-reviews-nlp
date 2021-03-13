@@ -213,7 +213,7 @@ elif choice == 'Recommender':
             st.write('Based on your input coffee, I recommend you try a blend from:','\n\n',ratings.iloc[recs[0]]['Roaster'],'\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
             st.plotly_chart(fig, use_container_width=True)
         else:
-            st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a great bean from',ratings.iloc[recs[0]]['Coffee Origin']+'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a great bean from',str(ratings.iloc[recs[0]]['Coffee Origin'])+'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
             st.plotly_chart(fig, use_container_width=True)
 
 elif choice == 'Score from Text':
