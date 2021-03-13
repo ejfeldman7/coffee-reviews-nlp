@@ -162,7 +162,7 @@ if choice == 'Home':
 elif choice == 'Recommender':
     st.title('Coffee Recommender')
     st.write('''Get a new coffee recommendation. Please keep in mind the reviews in this recommendation span across multiple years and the coffee recommended may not be currently available. \n
-             Please select from __one__ of the two options below.''')
+    Please select from __one__ of the two options below.''')
     
     first = st.checkbox('I want to enter a description of my own')
     second = st.checkbox("I'd like a list of adjectives to choose from")
