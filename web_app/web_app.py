@@ -156,7 +156,7 @@ if choice == 'Home':
     5. Use the __Generated Reviews__ app to create a computer generated review for a coffee depending on different flavor attributes
     \r\n
     This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
-    [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!  \r\n
+    [Medium/TDS](https://ethan-feldman.medium.com/) and on his [website](ejfeldman.com)  \r\n
     '''
     
 elif choice == 'Recommender':
