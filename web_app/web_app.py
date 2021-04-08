@@ -164,17 +164,19 @@ elif choice == 'Recommender':
     st.write('Get a new coffee recommendation. Please keep in mind the reviews in this recommendation span across multiple years and the coffee recommended may not be currently available.')
     st.write('Please select from __one__ of the two options below.')
     
-    first = st.checkbox('I want to enter a description of my own')
-    second = st.checkbox("I'd like a list of adjectives to choose from")
+    #Radio button for input style
+    rec_choice = st.radio('Choices',('I want to enter a description of my own',"I'd like a list of adjectives to choose from"),index=next_clicked)
+#     first = st.checkbox('I want to enter a description of my own')
+#     second = st.checkbox("I'd like a list of adjectives to choose from")
     user_coffee_description = ''
-    if first:
+    if rec_choice == 'I want to enter a description of my own':
         # User inputs their own description
         user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
         st.write('''
         If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean: \n 
         Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
         ''')
-    elif second:
+    elif rec_choice == "I'd like a list of adjectives to choose from":
         # User selects from a list of adjective categories
         col1, col2, col3 = st.beta_columns(3)
         a,b,c,d,e,f = col1.checkbox('Berries'),col1.checkbox('Cherry'),col1.checkbox('Wine-y'),col1.checkbox('Floral'),col1.checkbox('Citrus'),col1.checkbox('Tropical')
