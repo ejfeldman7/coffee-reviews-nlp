@@ -34,55 +34,64 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
 from sklearn.metrics import pairwise_distances
 
-with open('coffee_words.pickle','rb') as read_file:
+import plotly
+import plotly.graph_objects as go
+import plotly.express as px
+from plotly.subplots import make_subplots
+
+#Paths
+#'/app/Coffee-Reviews-NLP/web_app/models_embeddings/'
+#'/app/Coffee-Reviews-NLP/web_app/data/'
+
+with open('/app/coffee-reviews-nlp/web_app/coffee_words.pickle','rb') as read_file:
     coffee = pickle.load(read_file)
-with open('coffee_ratings.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/coffee_ratings.pickle','rb') as read_file:
     ratings = pickle.load(read_file)
-with open('combined.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/combined.pickle','rb') as read_file:
     combined = pickle.load(read_file)
-with open('df_full.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/df_full.pickle','rb') as read_file:
     df = pickle.load(read_file)
-with open('df_topic_breakdown.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/df_topic_breakdown.pickle','rb') as read_file:
     df_topic_breakdown = pickle.load(read_file)
-with open('sentiment.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/sentiment.pickle','rb') as read_file:
     sentiment = pickle.load(read_file)
-with open('generating_reviews.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/generating_reviews.pickle','rb') as read_file:
     generating_reviews = pickle.load(read_file)
 
-with open('blindtfidf_vec.pickle', 'rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/blindtfidf_vec.pickle', 'rb') as read_file:
     blindtfidf = pickle.load(read_file)
-with open('blindtfidf_mat.pickle', 'rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/blindtfidf_mat.pickle', 'rb') as read_file:
     tfidf_blind = pickle.load(read_file)
 ratings = ratings.reset_index().rename(columns={'index':'Roaster'})
 
-with open('nmf_tfidfblind.pickle', 'rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/nmf_tfidfblind.pickle', 'rb') as read_file:
     nmf_tfidfblind = pickle.load(read_file)
 
-with open('blindvectorizer.pickle', 'rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/blindvectorizer.pickle', 'rb') as read_file:
     blindvectorizer = pickle.load(read_file)
-with open('blindtfidf_topic.pickle', 'rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/blindtfidf_topic.pickle', 'rb') as read_file:
     blindtfidf_topic = pickle.load(read_file)
-with open('blindtopic_tfidf.pickle', 'rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/blindtopic_tfidf.pickle', 'rb') as read_file:
     blindtopic_tfidf = pickle.load(read_file)
 
 
-with open('words_to_score_rf.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/words_to_score_rf.pickle','rb') as read_file:
     rfr = pickle.load(read_file)
-with open('num_to_score_RF.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/num_to_score_RF.pickle','rb') as read_file:
     rfr_num = pickle.load(read_file)
-with open('words_to_score_linear.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/words_to_score_linear.pickle','rb') as read_file:
     lm = pickle.load(read_file)
-with open('subcats_to_score_lasso.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/subcats_to_score_lasso.pickle','rb') as read_file:
     lasso = pickle.load(read_file)
-with open('lm_aroma.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/lm_aroma.pickle','rb') as read_file:
     lm_aroma = pickle.load(read_file)
-with open('lm_acidity.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/lm_acidity.pickle','rb') as read_file:
     lm_acidity = pickle.load(read_file)
-with open('lm_aftertaste.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/lm_aftertaste.pickle','rb') as read_file:
     lm_aftertaste = pickle.load(read_file)
-with open('lm_flavor.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/lm_flavor.pickle','rb') as read_file:
     lm_flavor = pickle.load(read_file)
-with open('lm_body.pickle','rb') as read_file:
+with open('/app/coffee-reviews-nlp/web_app/lm_body.pickle','rb') as read_file:
     lm_body = pickle.load(read_file)
 
 import os.path
@@ -92,7 +101,7 @@ next = st.sidebar.button('Next on list')
 
 # will use this list and next button to increment page, MUST BE in the SAME order
 # as the list passed to the radio button
-new_choice = ['Home','Recommender','Score from Text','Score from Score','Generated Reviews']
+new_choice = ['Home','Recommender','Score from Text','Score from Subscores','Generated Reviews']
 
 # This is what makes this work, check directory for a pickled file that contains
 # the index of the page you want displayed, if it exists, then you pick up where the
@@ -117,50 +126,56 @@ if next:
         next_clicked = 0 # go back to the beginning i.e. homepage
 
 # create your radio button with the index that we loaded
-choice = st.sidebar.radio("go to",('Home','Recommender','Score from Text','Score from Score','Generated Reviews'), index=next_clicked)
+choice = st.sidebar.radio("go to",('Home','Recommender','Score from Text','Score from Subscores','Generated Reviews'), index=next_clicked)
 
+st.sidebar.write(
+    '''
+    __About__ \n
+    This project was built from just under 6000 reviews from www.coffeereview.com. The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees. 
+    \n
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!
+    ''')
 # pickle the index associated with the value, to keep track if the radio button has been used
 pickle.dump(new_choice.index(choice), open('next.p', 'wb'))
 
 # finally get to whats on each page
 if choice == 'Home':
     st.title('Welcome to my data analysis app for coffee reviews!')
-    '''On the side bar on the left you will find a few different applications'''
+    '''
+    This project was built from just under 6000 reviews from  www.coffeereview.com. 
+    The blind reviews were used to create nine-dimensional flavor vectors using non-negative matrix factorization on a TF-IDF encoding of each coffee's review. This enabled comparison between coffees by their difference or similarity across the derived flavor spectrum.
+    These vectors and additional features were then used for recommendations of coffees with similar vectors, predicting scores, and more.  \r\n
+    __On the side bar__ on the left you will find a few different application  \r\n
+    __Below__ is a quick table of contents for the different pages of the site
+    '''
     '''
     1. This is the __Home Page__
     2. Use the __Recommender__ app to get a coffee recommendation based on your flavor description
     3. Use the __Score from Text__ app to generate a prediction for overall and subcategory score based on a coffee's description
-    4. Use the __ Score from Scores__ app to generate an overall score prediction based on subcategory scores
+    4. Use the __ Score from Subscores__ app to generate an overall score prediction based on subcategory scores
     5. Use the __Generated Reviews__ app to create a computer generated review for a coffee depending on different flavor attributes
+    \r\n
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
+    [Medium/TDS](https://ethan-feldman.medium.com/) and on his [website](https://www.ejfeldman.com/)  \r\n
     '''
     
 elif choice == 'Recommender':
     st.title('Coffee Recommender')
-    st.write('Get a new coffee recommendation')
-    rec_choice = st.radio('Choices',('I want to enter a description of my own',"I'd like a list of adjectives to choose from"),index=next_clicked)
-#     first = st.checkbox()
-#     second = st.checkbox()
-    user_coffee_description = ''
-    # Format inputs
-    if rec_choice == 'I want to enter a description of my own':
-        user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
-#         text = [user_coffee_description]
-#         doc_topic = blindtfidf_topic
-#         vt = blindtfidf.transform(text).todense()
-#         tt1 = nmf_tfidfblind.transform(vt)
-
-#         #Find Recommendations
-#         indices = pairwise_distances(tt1.reshape(1,-1),doc_topic,metric='cosine').argsort()
-#         recs = list(indices[0][0:4])
-#         # df_topic_breakdown.iloc[recs]
-#         # st.write('The coffee you liked was described as:',t[0])
-#         st.write('\n')
-#         if user_coffee_description == '':
-#             st.write('Excited to recommend a coffee for you!')
-#         else:
-#             st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a bean from',ratings.iloc[recs[0]]['Coffee Origin'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+    st.write('Get a new coffee recommendation. Please keep in mind the reviews in this recommendation span across multiple years and the coffee recommended may not be currently available.')
+    st.write('Please select from __one__ of the two options below.')
     
-    elif rec_choice == "I'd like a list of adjectives to choose from":
+    first = st.checkbox('I want to enter a description of my own')
+    second = st.checkbox("I'd like a list of adjectives to choose from")
+    user_coffee_description = ''
+    if first:
+        # User inputs their own description
+        user_coffee_description = st.text_input("Give a couple sentences here of how you describe your ideal coffee. Try to include as much as you can about your desired flavor profile.", '')
+        st.write('''
+        If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean: \n 
+        Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
+        ''')
+    elif second:
+        # User selects from a list of adjective categories
         col1, col2, col3 = st.beta_columns(3)
         a,b,c,d,e,f = col1.checkbox('Berries'),col1.checkbox('Cherry'),col1.checkbox('Wine-y'),col1.checkbox('Floral'),col1.checkbox('Citrus'),col1.checkbox('Tropical')
         
@@ -206,7 +221,8 @@ elif choice == 'Recommender':
         elif r:
             text_list = text_list + [random.choice(['rich'])]
         user_coffee_description = ' '.join(text_list)
-        
+    
+    # User text is converted to vector and given topic scores  
     text = [user_coffee_description]
     doc_topic = blindtfidf_topic
     vt = blindtfidf.transform(text).todense()
@@ -215,17 +231,55 @@ elif choice == 'Recommender':
     #Find Recommendations
     indices = pairwise_distances(tt1.reshape(1,-1),doc_topic,metric='cosine').argsort()
     recs = list(indices[0][0:4])
-    # df_topic_breakdown.iloc[recs]
-    # st.write('The coffee you liked was described as:',t[0])
+   
     st.write('\n')
+    # Placeholder for recommendation
     if user_coffee_description == '':
-        st.write('Excited to recommend a coffee for you!')
+        st.write('''
+        Excited to recommend a coffee for you!''') 
+    # Give recommendations   
     else:
-        st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a bean from',ratings.iloc[recs[0]]['Coffee Origin'],'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+        # Setting up polar plots for comparison of input and recommendation
+        example_comps=[doc_topic[recs[0]],tt1[0]]
+        names = [ratings.iloc[recs[0]]['Roaster'],'Your Input Description']
+        categories = ['bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth','cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries','woody_nut_caramel', 'cherry_vinuous_choc']
+        topics = ['Bright, Floral, Citrus', 'Chocolate, Dark, Woody', 'Tart, Sweet, Smooth','Cacao, Nutty, Clean', 'Sweet, Nut, Pine', 'Juicy, Honey, Cacao', 'Red Berries','Nutty, Caramel, Woody', 'Cherry, Vinuous, Chocolate']
+        fig = go.Figure()
+        for i in range(0,2):
+            fig.add_trace(go.Scatterpolar(
+                  r=example_comps[i],
+                  theta=topics,
+                  fill=None,
+                  name=names[i],
+                opacity = .5,
+            ))
+
+        fig.update_layout(
+                title = {
+                    'text':'Visualizing a comparison',
+                    'y':.9,
+                    'x':.5,
+                    'xanchor':'center',
+                    'yanchor':'top'},
+                legend_title="Comparison Coffees",
+          polar=dict(
+            radialaxis=dict(
+              visible=False,
+              range=[0, max(max(doc_topic[recs[0]]),max(tt1[0]))+.03]
+            )),
+          showlegend=True
+            )
+        
+        if ratings.iloc[recs[0]]['Coffee Origin'] == 'Not disclosed' or ratings.iloc[recs[0]]['Coffee Origin'] == None:
+            st.write('Based on your input coffee, I recommend you try a blend from:','\n\n',ratings.iloc[recs[0]]['Roaster'],'\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.write('Based on your input coffee, I recommend you try:','\n\n',ratings.iloc[recs[0]]['Roaster'],'who roast a great bean from',str(ratings.iloc[recs[0]]['Coffee Origin'])+'.','\n\n','It could be desribed as:','\n\n',coffee.iloc[recs[0]].Review)
+            st.plotly_chart(fig, use_container_width=True)
 
 elif choice == 'Score from Text':
     st.title('Score Predictor')
-    st.write('Predict coffee scores from reviews')
+    st.write('Predict coffee scores from reviews. This output is a prediction of the score that might be assigned on a 0-100 scale as well as subscores on a 0-10 scale.')
     
     user_coffee_description = st.text_input("Provide a couple sentence descripton of the flavors, acid level, aroma, aftertaste, and body of your coffee.", '')
     user_text = [user_coffee_description]
@@ -259,7 +313,13 @@ elif choice == 'Score from Text':
     body = lm_body.predict(attributes)
 
     if user_coffee_description == '':
-        st.write('Excited to predict the score of your coffee!')
+        st.write('''
+        Excited to predict the score of your coffee! \n
+        If you are not sure of a description to input, feel free to copy and paste this example of an Ethiopia Suke Quto from Street Bean which was not part of the reviews of this project. \n 
+        If you are interested, the real scores for this coffee were: \n
+        Overall 93, Aroma 9, Acidity 9, Body 8, Flavor 9, Aftertaste 8 \n
+        Crisply sweet, citrusy-bright. Tangerine zest, apricot, almond, cocoa nib, freesia-like flowers in aroma and cup. Sweet-leaning structure with high-toned acidity; smooth, satiny mouthfeel. Notes of tangerine zest and almond characterize the crisp, long finish.
+        ''')
     else:
         st.write('Based on your input coffee, I predict it to receive a score of:',overall[0].round(2),'\n\n',
                 'An aroma score of (out of 10):',aroma[0].round(2),'\n\n',
@@ -268,9 +328,9 @@ elif choice == 'Score from Text':
                 'A flavor score of (out of 10):',flavor[0].round(2),'\n\n',
                 'A body score of (out of 10):',body[0].round(2))
 
-elif choice == 'Score from Score':
-    st.title('Score Predictor (if you have the details)')
-    st.write('Predict an overall score from subcategories')
+elif choice == 'Score from Subscores':
+    st.title('Overall Score Based on Subcategories')
+    st.write('Use this tool to create a 0-100 rating based on subscores in the categories below.')
     
     aroma = st.slider('aroma',min_value=1,max_value=10,step=1)
     body = st.slider('body',min_value=1,max_value=10,step=1)
@@ -291,7 +351,7 @@ elif choice == 'Score from Score':
 
 elif choice == 'Generated Reviews':
     st.title('Review Generator')
-    st.write('Generate a rough draft review based on past reviews in the category')    
+    st.write('Generate a "rough draft" review based on past reviews in the category.')    
 
     first = st.checkbox("Coffee Type: Smooth, Citrus, Floral")
     second = st.checkbox("Coffee Type: Dark, Chocolate, Roast, Wood ")
@@ -522,60 +582,6 @@ elif choice == 'Generated Reviews':
 #         st.write('Pick a coffee type to see a computer generated review!')
 #     else:
 #         st.write(generate_review(markov_chain(text_list)))
-
-
-# In[10]:
-
-
-import streamlit as st
-
-import pandas as pd
-pd.set_option('display.max_columns', None)
-import numpy as np
-import re
-import requests
-import pickle
-from collections import defaultdict
-import random
-import sklearn
-
-import nltk
-nltk.download('vader_lexicon')
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from nltk.tokenize import word_tokenize
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import NMF
-from sklearn.metrics import pairwise_distances
-
-
-# In[11]:
-
-
-
-
-
-# In[4]:
-
-
-
-
-
-# In[14]:
-
-
-
-
-
-# In[15]:
-
-
-
-
-
-# In[27]:
-
-
-
 
 
 # In[ ]:
