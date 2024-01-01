@@ -27,7 +27,7 @@ pickle_jar = os.path.join(CUR_DIR, 'model_embeddings')
 data_path = os.path.join(CUR_DIR, 'data')
 data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None}
 pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None,
-           'lm_flavor': None, 'lm_body': None, 'lm_aroma': None,
+           'lm_flavor': None, 'lm_body': None, 'lm_aroma': None, 'lm': None,
            'generating_reviews': None, 'blindtfidf_vec': None,
            'nmf_tfidfblind': None, 'blindvectorizer': None,
            'blindtfidf_topic': None, 'num_to_score_RF': None}
