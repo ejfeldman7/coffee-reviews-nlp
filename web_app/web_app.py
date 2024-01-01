@@ -2,6 +2,7 @@ import pickle
 from collections import defaultdict
 import random
 import os.path
+import os
 
 import streamlit as st
 import pandas as pd
@@ -13,6 +14,14 @@ nltk.download('vader_lexicon')
 
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+
+thisdir = os.getcwd()
+
+# r=root, d=directories, f = files
+for r, d, f in os.walk(thisdir):
+    for file in f:
+        if file.endswith(".pickle"):
+            print(os.path.join(r, file))
 
 pickle_jar = os.path.join(CUR_DIR, 'model_embeddings')
 data_path = os.path.join(CUR_DIR, 'data')
