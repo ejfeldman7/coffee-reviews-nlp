@@ -56,7 +56,7 @@ coffee = pickles['coffee_words']
 
 lm = pickles['lm']
 lm_aroma = pickles['lm_aroma']
-lm_acidity = pickles['lm_acidty']
+lm_acidity = pickles['lm_acidity']
 lm_aftertaste = pickles['lm_aftertaste']
 lm_flavor = pickles['lm_flavor']
 lm_body = pickles['lm_body']
