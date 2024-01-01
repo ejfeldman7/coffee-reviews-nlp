@@ -23,7 +23,7 @@ for r, d, f in os.walk(thisdir):
         if file.endswith(".pickle"):
             print(os.path.join(r, file))
 
-pickle_jar = os.path.join(CUR_DIR, 'model_embeddings')
+pickle_jar = os.path.join(CUR_DIR, 'model_files')
 data_path = os.path.join(CUR_DIR, 'data')
 data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None}
 pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None,
