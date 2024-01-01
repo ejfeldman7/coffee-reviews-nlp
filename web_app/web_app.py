@@ -38,7 +38,7 @@ for pkl in pickles.keys():
         with open(os.path.join(pickle_jar, f'{pkl}.pickle')) as f:
             pickles[pkl] = pickle.load(f)
     except Exception as e:
-        print(f"Error loading pickle file {file_path}: {e}")
+        print(f"Error loading pickle file {pkl}: {e}")
 for datum in data.keys():
     with open(os.path.join(pickle_jar, f'{pkl}.pickle')) as f:
         data[datum] = pickle.load(f)
