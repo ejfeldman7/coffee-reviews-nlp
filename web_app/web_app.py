@@ -27,7 +27,7 @@ pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None
            , 'nmf_tfidfblind': None, 'blindvectorizer': None
            , 'blindtfidf_topic': None, 'num_to_score_RF': None}
 
-for pkl, var in pickles.itmes():
+for pkl, var in pickles.items():
     with open(f'{pickle_jar}{pkl}.pickle', 'rb') as f:
         pickles[pkl] = pickle.load(f)
 
