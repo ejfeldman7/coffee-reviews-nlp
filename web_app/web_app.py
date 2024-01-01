@@ -35,13 +35,13 @@ pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None,
 
 for pkl in pickles.keys():
     try:
-        with open(os.path.join(pickle_jar, f'{pkl}.pickle')) as f:
+        with open(os.path.join(pickle_jar, f'{pkl}.pickle', 'rb')) as f:
             pickles[pkl] = pickle.load(f)
     except Exception as e:
         print(f"Error loading pickle file {pkl}: {e}")
 for datum in data.keys():
     try:
-        with open(os.path.join(data_path, f'{pkl}.pickle')) as f:
+        with open(os.path.join(data_path, f'{pkl}.pickle', 'rb')) as f:
             data[datum] = pickle.load(f)
     except Exception as e:
         print(f"Error loading data file {datum}: {e}")
