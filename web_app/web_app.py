@@ -24,7 +24,7 @@ for r, d, f in os.walk(thisdir):
             print(os.path.join(r, file))
 
 pickle_jar = os.path.join(CUR_DIR, 'model_files')
-data_path = os.path.join(CUR_DIR, 'data')
+data_path = os.path.join(CUR_DIR, 'lake')
 data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None, 'coffee_words': None}
 pickles = {'lm_acidity': None, 'lm_aftertaste': None, 'lm_flavor': None, 'lm_body': None, 'lm_aroma': None, 'lm': None,
            'generating_reviews': None, 'blindtfidf_vec': None, 'nmf_tfidfblind': None, 'blindvectorizer': None,
@@ -33,15 +33,23 @@ pickles = {'lm_acidity': None, 'lm_aftertaste': None, 'lm_flavor': None, 'lm_bod
 
 for pkl in pickles.keys():
     try:
-        with open(os.path.join(pickle_jar, f'{pkl}.pickle')) as f:
+        with open(os.path.join(pickle_jar, f'{pkl}.pickle', 'rb')) as f:
             pickles[pkl] = pickle.load(f)
-    except Exception as e:
+    except:
+        old_pickles = os.path.join(CUR_DIR, 'models_embeddings')
+        with open(os.path.join(old_pickles, f'{pkl}.pickle', 'rb')) as f:
+            pickles[pkl] = pickle.load(f)
+    else Exception as e:
         print(f"Error loading pickle file {pkl}: {e}")
 for datum in data.keys():
     try:
-        with open(os.path.join(data_path, f'{pkl}.pickle')) as f:
+        with open(os.path.join(data_path, f'{pkl}.pickle', 'rb')) as f:
             data[datum] = pickle.load(f)
-    except Exception as e:
+    except:
+        old_data = os.path.join(CUR_DIR, 'data')
+        with open(os.path.join(old_data, f'{pkl}.pickle', 'rb')) as f:
+            data[datum] = pickle.load(f)
+    else Exception as e:
         print(f"Error loading data file {datum}: {e}")
 
 doc_topic = pickles['blindtfidf_topic']
