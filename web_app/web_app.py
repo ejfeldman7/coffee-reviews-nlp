@@ -40,8 +40,11 @@ for pkl in pickles.keys():
     except Exception as e:
         print(f"Error loading pickle file {pkl}: {e}")
 for datum in data.keys():
-    with open(os.path.join(pickle_jar, f'{pkl}.pickle')) as f:
-        data[datum] = pickle.load(f)
+    try:
+        with open(os.path.join(data_path, f'{pkl}.pickle')) as f:
+            data[datum] = pickle.load(f)
+    except Exception as e:
+        print(f"Error loading data file {datum}: {e}")
 
 doc_topic = pickles['blindtfidf_topic']
 blindtfidf = pickles['blindtfidf_vec']
