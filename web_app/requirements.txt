@@ -3,5 +3,5 @@ requests==2.24.0
 # numpy<1.20.0
 scikit-learn
 nltk
-streamlit
+streamlit==0.76.0
 plotly==4.14.3
