@@ -9,21 +9,12 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import pairwise_distances
 import plotly.graph_objects as go
-import nltk
+from nltk import download
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-nltk.download('vader_lexicon')
 
 
+download('vader_lexicon')
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
-
-thisdir = os.getcwd()
-
-# r=root, d=directories, f = files
-for r, d, f in os.walk(thisdir):
-    for file in f:
-        if file.endswith(".pickle"):
-            print(os.path.join(r, file))
-
 pickle_jar = os.path.join(CUR_DIR, 'model_files')
 data_path = os.path.join(CUR_DIR, 'data')
 data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None}
