@@ -27,7 +27,7 @@ pickle_jar = os.path.join(CUR_DIR, 'model_files')
 data_path = os.path.join(CUR_DIR, 'data')
 data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None}
 pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None,
-           'lm_flavor': None, 'lm_body': None, 'lm_aroma': None, 'lm': None,
+           'lm_flavor': None, 'lm_body': None, 'lm_aroma': None, 'words_to_score_linear': None,
            'generating_reviews': None, 'blindtfidf_vec': None,
            'nmf_tfidfblind': None, 'blindvectorizer': None,
            'blindtfidf_topic': None, 'num_to_score_RF': None}
@@ -41,7 +41,7 @@ for pkl in pickles.keys():
         print(f"Error loading pickle file {pkl}: {e}")
 for datum in data.keys():
     try:
-        with open(os.path.join(data_path, f'{pkl}.pickle'), 'rb') as f:
+        with open(os.path.join(data_path, f'{datum}.pickle'), 'rb') as f:
             data[datum] = pickle.load(f)
     except Exception as e:
         print(f"Error loading data file {datum}: {e}")
@@ -54,7 +54,7 @@ blindvectorizer = pickles['blindvectorizer']
 rfr_num = pickles['num_to_score_RF']
 coffee = pickles['coffee_words']
 
-lm = pickles['lm']
+lm = pickles['words_to_score_linear']
 lm_aroma = pickles['lm_aroma']
 lm_acidity = pickles['lm_acidity']
 lm_aftertaste = pickles['lm_aftertaste']
