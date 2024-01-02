@@ -243,7 +243,7 @@ elif choice == 'Score from Text':
 
     user_coffee_description = st.text_input("Provide a couple sentence descripton of the flavors, acid level, aroma, aftertaste, and body of your coffee.", '')
     user_text = [user_coffee_description]
-    vt = blindtfidf.transform(user_text).todense()
+    vt = np.asarray(blindtfidf.transform(user_text).todense())
     tt1 = nmf_tfidfblind.transform(vt)
 
     word_count = pd.DataFrame()
