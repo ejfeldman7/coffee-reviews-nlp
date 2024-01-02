@@ -55,7 +55,7 @@ for r, d, f in os.walk(thisdir):
 
 # for pkl in pickles.keys():
 try:
-    with open(os.path.join(CUR_DIR, 'coffee_words.pickle', 'rb')) as f:
+    with open(os.path.join(CUR_DIR, 'coffee_words.pickle'), 'rb') as f:
         coffee = pickle.load(f)
 except Exception as e:
     print(f"Error loading pickle file: {e}")
