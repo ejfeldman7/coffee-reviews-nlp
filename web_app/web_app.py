@@ -6,6 +6,7 @@ import os
 
 import streamlit as st
 import pandas as pd
+import numpy as np
 from sklearn.metrics import pairwise_distances
 import plotly.graph_objects as go
 import nltk
@@ -184,7 +185,7 @@ elif choice == 'Recommender':
     # User text is converted to vector and given topic scores
     text = [user_coffee_description]
     doc_topic = blindtfidf_topic
-    vt = blindtfidf.transform(text).todense()
+    vt = np.asarray(blindtfidf.transform(text).todense())
     tt1 = nmf_tfidfblind.transform(vt)
 
     # Find Recommendations
