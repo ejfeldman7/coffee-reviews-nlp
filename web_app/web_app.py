@@ -58,7 +58,7 @@ try:
     with open(os.path.join(CUR_DIR, 'coffee_words.pickle', 'rb')) as f:
         coffee = pickle.load(f)
 except Exception as e:
-    print(f"Error loading pickle file {pkl}: {e}")
+    print(f"Error loading pickle file: {e}")
 
 
 # with open('/app/coffee-reviews-nlp/web_app/coffee_words.pickle','rb') as read_file:
