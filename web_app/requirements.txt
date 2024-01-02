@@ -1,7 +1,7 @@
 requests==2.24.0
 # pandas==1.0.5
 # numpy<1.20.0
-scikit-learn
+scikit-learn==0.23.*
 nltk
 streamlit==0.76.0
 plotly==4.14.3
