@@ -42,9 +42,29 @@ from plotly.subplots import make_subplots
 #Paths
 #'/app/Coffee-Reviews-NLP/web_app/models_embeddings/'
 #'/app/Coffee-Reviews-NLP/web_app/data/'
+CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
-with open('/app/coffee-reviews-nlp/web_app/coffee_words.pickle','rb') as read_file:
-    coffee = pickle.load(read_file)
+thisdir = os.getcwd()
+
+# r=root, d=directories, f = files
+for r, d, f in os.walk(thisdir):
+    for file in f:
+        if file.endswith(".pickle"):
+            print(os.path.join(r, file))
+
+# pickle_jar = os.path.join(CUR_DIR, 'model_files')
+# data_path = os.path.join(CUR_DIR, 'data')
+
+# for pkl in pickles.keys():
+try:
+    with open(os.path.join(CUR_DIR, 'coffee_words.pickle', 'rb')) as f:
+        coffee = pickle.load(f)
+except Exception as e:
+    print(f"Error loading pickle file {pkl}: {e}")
+
+
+# with open('/app/coffee-reviews-nlp/web_app/coffee_words.pickle','rb') as read_file:
+#     coffee = pickle.load(read_file)
 with open('/app/coffee-reviews-nlp/web_app/coffee_ratings.pickle','rb') as read_file:
     ratings = pickle.load(read_file)
 with open('/app/coffee-reviews-nlp/web_app/combined.pickle','rb') as read_file:
