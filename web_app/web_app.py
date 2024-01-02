@@ -18,10 +18,8 @@
 import streamlit as st
 
 import pandas as pd
-pd.set_option('display.max_columns', None)
 import numpy as np
-import re
-import requests
+import os
 import pickle
 from collections import defaultdict
 import random
