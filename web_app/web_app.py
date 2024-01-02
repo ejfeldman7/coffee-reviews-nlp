@@ -123,7 +123,7 @@ elif choice == 'Recommender':
     st.write('Please select from __one__ of the two options below.')
 
     # Radio button for input style
-    rec_choice = st.radio('Choices', ('I want to enter a description of my own', "I'd like a list of adjectives to choose from"), index=next_clicked)
+    rec_choice = st.radio('Choices', ('I want to enter a description of my own', "I'd like a list of adjectives to choose from"), index=0)
 #     first = st.checkbox('I want to enter a description of my own')
 #     second = st.checkbox("I'd like a list of adjectives to choose from")
     user_coffee_description = ''
