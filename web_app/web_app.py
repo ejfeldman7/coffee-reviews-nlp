@@ -15,13 +15,13 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 download('vader_lexicon')
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
-pickle_jar = os.path.join(CUR_DIR, 'model_files')
-data_path = os.path.join(CUR_DIR, 'data')
+pickle_jar = os.path.join(CUR_DIR, 'web_app/model_files')
+data_path = os.path.join(CUR_DIR, 'web_app/data')
 data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None}
 pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None,
            'lm_flavor': None, 'lm_body': None, 'lm_aroma': None, 'words_to_score_linear': None,
            'generating_reviews': None, 'blindtfidf_vec': None,
-           'nmf_tfidfblind': None, 'blindvectorizer': None,
+           'nmf_v122': None, 'blindvectorizer': None,
            'blindtfidf_topic': None, 'num_to_score_RF': None}
 
 
@@ -41,7 +41,7 @@ for datum in data.keys():
 doc_topic = pickles['blindtfidf_topic']
 blindtfidf = pickles['blindtfidf_vec']
 blindtfidf_topic = pickles['blindtfidf_topic']
-nmf_tfidfblind = pickles['nmf_tfidfblind']
+nmf_tfidfblind = pickles['nmf_v122']
 blindvectorizer = pickles['blindvectorizer']
 rfr_num = pickles['num_to_score_RF']
 coffee = pickles['coffee_words']
