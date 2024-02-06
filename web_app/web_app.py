@@ -254,6 +254,7 @@ elif choice == 'Score from Text':
 
     attributes = pd.concat([sentiment_vector, word_count], axis=1)
     attributes = pd.concat([attributes, pd.DataFrame(tt1)], axis=1)
+    attributes.columns = attributes.columns.astype(str)
 
     overall = lm.predict(attributes)
     aroma = lm_aroma.predict(attributes)
