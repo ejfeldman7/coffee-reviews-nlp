@@ -38,9 +38,9 @@ for datum in data.keys():
     except Exception as e:
         print(f"Error loading data file {datum}: {e}")
 
-# doc_topic = pickles['tfidftmat_202402']
-blindtfidf = pickles['tfidfvec_202402']
-blindtfidf_topic = pickles['tfidftopic_202402']
+doc_topic = pickles['blindtfidf_topic']
+blindtfidf = pickles['blindtfidf_vec']
+blindtfidf_topic = pickles['blindtfidf_topic']
 nmf_tfidfblind = pickles['nmf_v122']
 blindvectorizer = pickles['blindvectorizer']
 rfr_num = pickles['num_to_score_RF']
@@ -54,9 +54,9 @@ lm_flavor = pickles['lm_flavor']
 lm_body = pickles['lm_body']
 generating_reviews = pickles['generating_reviews']
 
-ratings = data['ratings_202402']
-# df_full = data['df_full']
-# df_topic_breakdown = data['df_topic_breakdown']
+ratings = data['coffee_ratings']
+df_full = data['df_full']
+df_topic_breakdown = data['df_topic_breakdown']
 
 ratings = ratings.reset_index().rename(columns={'index': 'Roaster'})
 
@@ -193,8 +193,8 @@ elif choice == 'Recommender':
         # Setting up polar plots for comparison of input and recommendation
         example_comps = [doc_topic[recs[0]], tt1[0]]
         names = [ratings.iloc[recs[0]]['Roaster'], 'Your Input Description']
-        categories = ['tart_tea_juicy', 'fruit_floral_dry', 'chocolate_dark_rich', 'pastry_hazelnut_date', 'cacao_crisp_citrus', 'floral_nectar_acid', 'orange_grapefruit_lime', 'currant_cherry_berry', 'wood_nut_caramel']
-        topics = ['Tart, Tea, Juicy', 'Fruit, Floral, Dry', 'Choc, Dark, Rich', 'Pastry, Hazelnut, Date', 'Cacao, Crisp, Citrus', 'Floral, Nectar, Acid', 'Citrus!!!', 'Currant Cherry Berry', 'Wood, Nutty, Caramel']
+        categories = ['bright_floral_citrus', 'choc_woody_dark', 'tart_sweet_smooth', 'cacao_nut_clean', 'sweet_nut_pine', 'juicy_cacao_honey', 'red_berries', 'woody_nut_caramel', 'cherry_vinuous_choc']
+        topics = ['Bright, Floral, Citrus', 'Chocolate, Dark, Woody', 'Tart, Sweet, Smooth', 'Cacao, Nutty, Clean', 'Sweet, Nut, Pine', 'Juicy, Honey, Cacao', 'Red Berries', 'Nutty, Caramel, Woody', 'Cherry, Vinuous, Chocolate']
         fig = go.Figure()
         for i in range(0, 2):
             fig.add_trace(go.Scatterpolar(
@@ -303,17 +303,16 @@ elif choice == 'Score from Subscores':
 elif choice == 'Generated Reviews':
     st.title('Review Generator')
     st.write('Generate a "rough draft" review based on past reviews in the category.')
-    cats = ['Tart, Tea, Juicy', 'Fruit, Floral, Dry', 'Choc, Dark, Rich', 'Pastry, Hazelnut, Date', 'Cacao, Crisp, Citrus', 'Floral, Nectar, Acid', 'Citrus!!!', 'Currant Cherry Berry', 'Wood, Nutty, Caramel']
 
-    first = st.checkbox(f"Coffee Type: f{cats[0]}")
-    second = st.checkbox(f"Coffee Type: f{cats[1]}")
-    third = st.checkbox(f"Coffee Type: f{cats[2]}")
-    fourth = st.checkbox(f"Coffee Type: f{cats[3]}")
-    fifth = st.checkbox(f"Coffee Type: f{cats[4]}")
-    sixth = st.checkbox(f"Coffee Type: f{cats[5]}")
-    seventh = st.checkbox(f"Coffee Type: f{cats[6]}")
-    eighth = st.checkbox(f"Coffee Type: f{cats[7]}")
-    ninth = st.checkbox(f"Coffee Type: f{cats[8]}")
+    first = st.checkbox("Coffee Type: Smooth, Citrus, Floral")
+    second = st.checkbox("Coffee Type: Dark, Chocolate, Roast, Wood ")
+    third = st.checkbox("Coffee Type: Sweet, Almond, Tart, Zest")
+    fourth = st.checkbox("Coffee Type: Cacao, Nutty, Dried Fruit, Clean")
+    fifth = st.checkbox("Coffee Type: Sweet, Hazelnut, Resinous")
+    sixth = st.checkbox("Coffee Type: Juicy, Acidic, Cacao, Nectar")
+    seventh = st.checkbox("Coffee Type: Red Berries")
+    eighth = st.checkbox("Coffee Type: Caramel, Nutty, Woody")
+    ninth = st.checkbox("Coffee Type: Cherry, Vinuous, Chocolate")
 
     def markov_chain(corpus):
         # tokenize text into words
