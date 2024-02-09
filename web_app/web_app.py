@@ -20,9 +20,9 @@ data_path = os.path.join(CUR_DIR, 'data')
 data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None}
 pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None,
            'lm_flavor': None, 'lm_body': None, 'lm_aroma': None, 'words_to_score_linear': None,
-           'generating_reviews': None, 'tfidfvec_202402': None,
-           'nmf_202402': None, 'blindvectorizer': None,
-           'tfidftopic_202402': None, 'num_to_score_RF': None}
+           'generating_reviews': None, 'blindtfidf_vec': None,
+           'nmf_v122': None, 'blindvectorizer': None,
+           'blindtfidf_topic': None, 'num_to_score_RF': None}
 
 
 for pkl in pickles.keys():
@@ -41,7 +41,7 @@ for datum in data.keys():
 # doc_topic = pickles['tfidftmat_202402']
 blindtfidf = pickles['tfidfvec_202402']
 blindtfidf_topic = pickles['tfidftopic_202402']
-nmf_tfidfblind = pickles['nmf_202402']
+nmf_tfidfblind = pickles['nmf_v122']
 blindvectorizer = pickles['blindvectorizer']
 rfr_num = pickles['num_to_score_RF']
 coffee = pickles['coffee_words']
