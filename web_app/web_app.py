@@ -17,7 +17,7 @@ download('vader_lexicon')
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 pickle_jar = os.path.join(CUR_DIR, 'model_files')
 data_path = os.path.join(CUR_DIR, 'data')
-data = {'df_full': None, 'df_topic_breakdown': None, 'coffee_ratings': None}
+data = {'df_full': None, 'df_topic_breakdown': None, 'ratings_202402': None}
 pickles = {'coffee_words': None, 'lm_acidity': None, 'lm_aftertaste': None,
            'lm_flavor': None, 'lm_body': None, 'lm_aroma': None, 'words_to_score_linear': None,
            'generating_reviews': None, 'tfidfvec_202402': None,
